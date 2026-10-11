@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:splashscreen/splashscreen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -13,13 +13,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
 
   final String title;
 
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.displayLarge,
             ),
           ],
         ),
@@ -77,10 +77,11 @@ class _MyDrawerState extends State<MyDrawer> {
     var TEXT_BLACK = Colors.amber;
     var RED_LIGHT = Colors.blueAccent;
     return Drawer(
-      child: Column(
-        children: <Widget>[
-          AppBar(
-            title: Text("Articles"),
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            AppBar(
+              title: const Text("Articles"),
             automaticallyImplyLeading: false,
             backgroundColor: RED_LIGHT,
             elevation: 0,
@@ -177,6 +178,7 @@ class _MyDrawerState extends State<MyDrawer> {
             color: TEXT_BLACK,
           ),
         ],
+        ),
       ),
     );
   }

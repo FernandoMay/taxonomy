@@ -1,16 +1,39 @@
-# drawer
+# taxonomy — ejercicio Flutter: counter + drawer de artículos
 
-A new Flutter project.
+**Historia**: ejercicio de agosto de 2019 (commit *"first"*, README original: `# drawer`). Dos piezas clásicas de Flutter aprendidas juntas: el counter de stateful (`setState`) y un `Drawer` con una lista de "artículos" — un ejercicio de navegación lateral típico de los tutoriales de la época.
 
-## Getting Started
+## Estado del revival (2026-10)
 
-This project is a starting point for a Flutter application.
+- **Migrada a null safety**: constructores `const MyHomePage({super.key, required this.title})`, `runApp(const MyApp())`
+- **Dependencia fantasma removida**: `package:splashscreen` estaba declarada e *importada* pero nunca se usaba — fuera
+- **`textTheme.display1` → `displayLarge`**: `display1` fue **eliminado** en Flutter 3 (no solo deprecado), el código ni siquiera analizaba
+- **🐛 Bug real fixeado**: el `Column` del drawer con 7 artículos de 80px **desbordaba la pantalla** (16px de overflow medido por el test) — ahora va envuelto en `SingleChildScrollView`. En teléfonos chicos el overflow original era visible
+- **Widget test REAL**: reemplaza el boilerplate; verifica el counter (0→1→2) y el drawer con sus artículos
+- `flutter analyze`: **0 issues** · `flutter test`: **2/2**
 
-A few resources to get you started if this is your first Flutter project:
+## Estructura
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+```
+lib/main.dart   # MyApp + MyHomePage (counter) + MyDrawer (7 artículos, ahora scrolleable)
+test/widget_test.dart
+```
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Correr
+
+```bash
+flutter pub get
+flutter analyze
+flutter test
+```
+
+## Siguiente paso natural
+
+Los artículos podrían salir de un `List<MapEntry<String, String>>` y renderizarse con `ListView.builder` dentro del `SingleChildScrollView` — de 7 bloques manuales a data-driven.
+
+## Licencia
+
+Sin declarar.
+
+## Autor
+
+[FernandoMay](https://github.com/FernandoMay)
